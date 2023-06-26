@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <section class="kotak1">
+            <h3 class="judul">Tambah yang harus dilakukan</h3><br>
+            <div class="addTask">
+                <p>Masukan hal yang akan dilakukan</p>
+                <input id="input">
+                <p>Masukan tanggal harus selesai</p>
+                <input type="date"><br>
+                <button class="submit" id="submit">Submit</button>
+            </div>
+        </section><br>
+    
+        <section class="kotak2">
+            <ol class="belumselesai">
+                <h3>Yang harus dilakukan</h3>
+            </ol>
+        </section><br>
+    
+        <section class="kotak3">
+            <ol class="sudahselesai">
+                <h3>Yang sudah dilakukan</h3>
+            </ol>
+        </section>
+    </div>
+
+    <script>
+        const inputField = document.getElementById('input');
+        const dateField = document.querySelector('input[type="date"]');
+        const submitButton = document.getElementById('submit');
+        const todoList = document.querySelector('.belumselesai');
+        const doneList = document.querySelector('.sudahselesai');
+        
+        function simpanDataTugas() {
+        localStorage.setItem('todoList', todoList.innerHTML);
+        localStorage.setItem('doneList', doneList.innerHTML);
+        }
+
+        function muatDataTugas() {
+        if (localStorage.getItem('todoList')) {
+            todoList.innerHTML = localStorage.getItem('todoList');
+        }
+        if (localStorage.getItem('doneList')) {
+            doneList.innerHTML = localStorage.getItem('doneList');
+        }
+        }
+        
+        function tambahTugas() {
+        const teksTugas = inputField.value.trim();
+        const tanggalTugas = dateField.value;
+        if (teksTugas !== '' && tanggalTugas !== '') {
+            const itemTugas = document.createElement('li');
+            const spanTugas = document.createElement('span');
+            spanTugas.textContent = teksTugas;
+            const spanTanggal = document.createElement('span');
+            spanTanggal.textContent = tanggalTugas;
+            const tombolCheck = document.createElement('button');
+            tombolCheck.innerHTML = '<i class="fas fa-check"></i>';
+            const tombolTrash = document.createElement('button');
+            tombolTrash.innerHTML = '<i class="fas fa-trash"></i>';
+            const tombolKembali = document.createElement('button');
+            tombolKembali.innerHTML = '<i class="fas fa-arrow-left"></i>';
+            
+            tombolCheck.addEventListener('click', function() {
+            const taskItem = this.parentNode;
+            const taskText = taskItem.querySelector('span').textContent;
+            const taskDate = taskItem.querySelector('span:nth-child(2)').textContent;
+            taskItem.removeChild(tombolCheck);
+            taskItem.appendChild(tombolTrash);
+            taskItem.appendChild(tombolKembali);
+            doneList.appendChild(taskItem);
+            simpanDataTugas(); 
+            });
+        
+            tombolTrash.addEventListener('click', function() {
+            const taskItem = this.parentNode;
+            taskItem.remove();
+            simpanDataTugas(); 
+            });
+        
+            tombolKembali.addEventListener('click', function() {
+            const taskItem = this.parentNode;
+            const taskText = taskItem.querySelector('span').textContent;
+            const taskDate = taskItem.querySelector('span:nth-child(2)').textContent;
+            taskItem.removeChild(tombolKembali);
+            taskItem.appendChild(tombolCheck);
+            taskItem.appendChild(tombolTrash);
+            todoList.appendChild(taskItem);
+            simpanDataTugas(); 
+            });
+        
+            itemTugas.appendChild(spanTugas);
+            itemTugas.appendChild(spanTanggal);
+            itemTugas.appendChild(tombolCheck);
+            itemTugas.appendChild(tombolTrash);
+            todoList.appendChild(itemTugas);
+            inputField.value = '';
+            dateField.value = '';
+        
+            simpanDataTugas();
+        }
+        }
+        submitButton.addEventListener('click', tambahTugas);
+        muatDataTugas();
+        </script>
+    <footer>copyright @ 2023 Wiranto</footer>
+</body>
+</html>

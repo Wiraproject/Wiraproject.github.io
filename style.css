@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.judul{
+    text-align: center;
+}
+p, input{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+input{
+    width: 668px;
+    height: 40px;
+    font-size: 16px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #00ff00;
+    border-radius: 8px;
+}
+.submit{
+    width: 82px;
+    height: 40px;
+    font-size: 14px;
+    margin-left: 84%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #00ff00;
+    border-radius: 8px;
+}
+.kotak1{
+    background-color: whitesmoke;
+    margin-left: 25%;
+    margin-right: 25%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.kotak2{
+    background-color: whitesmoke;
+    margin-left: 25%;
+    margin-right: 25%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.kotak3{
+    background-color: whitesmoke;
+    margin-left: 25%;
+    margin-right: 25%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+ol{
+    list-style: none;
+    counter-reset: my-counter;
+}
+ol li{
+    width: 100%;
+    padding: 18px;
+    margin: 5px 0;
+    background: #e96969bb;
+    font-size: 22px;
+    counter-increment: my-counter;
+}
+ol.sudahselesai li{
+    background: #00ff62;
+}
+ol li::before{
+    content: counter(my-counter);
+    background: #231381;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 2rem;
+    text-align: center;
+    color: #fff;
+    margin-right: 0.5rem;
+}
+li button{
+    float: right;
+    padding: 5px;
+    font-size: 28px;
+    line-height: 28px;
+    margin-right: 15px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+footer{
+    text-align: center;
+}
